@@ -7,7 +7,15 @@
 
 import random
 
+import os
 
+def save_key_to_file(key, filename="key.txt"):
+    with open(filename, 'w') as file:
+        file.write(str(key))
+
+def load_key_from_file(filename="key.txt"):
+    with open(filename, 'r') as file:
+        return int(file.read())
 
 def encryption(msg, key):
     alf = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,?!@# "
@@ -38,7 +46,9 @@ def decryption(crypto, key):
 
 
 msg = input("Digite a mensagem que deseja encriptar: ")
-key = random.randint(3, 10000)
+key = random.randint(3, 65)
+
+save_key_to_file(key)
 
 encriptacao = encryption(msg, key)
 print("Texto encriptado:", encriptacao)
@@ -46,7 +56,10 @@ print("Texto encriptado:", encriptacao)
 opcao = input("Deseja descriptografar a mensagem? (s/n): ")
 if opcao.lower() == 's':
     msg = input("Digite a mensagem que deseja decriptar: ")
-    decriptacao = decryption(msg, key)
+
+    key_input = load_key_from_file()
+
+    decriptacao = decryption(msg, key_input)
     print("Texto decriptado:", decriptacao)
 else:
     print("A mensagem não foi descriptografada.")
