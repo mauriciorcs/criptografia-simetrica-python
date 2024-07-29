@@ -5,6 +5,8 @@
 # + key: Adiciona a chave de criptografia ao índice encontrado.
 # % len(alf): Aplica o operador módulo (%) ao resultado da soma para garantir que o índice resultante esteja dentro dos limites do alfabeto estendido.
 
+import random
+
 
 
 def encryption(msg, key):
@@ -36,14 +38,15 @@ def decryption(crypto, key):
 
 
 msg = input("Digite a mensagem que deseja encriptar: ")
-key = int(input("Digite a chave de criptografia (um número inteiro): "))
+key = random.randint(3, 10000)
 
 encriptacao = encryption(msg, key)
 print("Texto encriptado:", encriptacao)
 
 opcao = input("Deseja descriptografar a mensagem? (s/n): ")
 if opcao.lower() == 's':
-    decriptacao = decryption(encriptacao, key)
+    msg = input("Digite a mensagem que deseja decriptar: ")
+    decriptacao = decryption(msg, key)
     print("Texto decriptado:", decriptacao)
 else:
     print("A mensagem não foi descriptografada.")
